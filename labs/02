@@ -41,3 +41,83 @@ public class Matriz {
         scanner.close();
     }
 
+ public static int[][] createMatrix(int fila, int column, Scanner scanner) {
+        int[][] matrix = new int[fila][column];
+        System.out.println("Ingrese los elementos de la matriz:");
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    public static int[][] addMatrices(int[][] matrix1, int[][] matrix2) {
+        int fila = matrix1.length;
+        int column = matrix1[0].length;
+        int[][] result = new int[fila][column];
+
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < column; j++) {
+                result[i][j] = matrix1[i][j] + matrix2[i][j];
+            }
+        }
+
+        return result;
+    }
+
+    public static int[][] multiplyMatrices(int[][] matrix1, int[][] matrix2) {
+        int fila = matrix1.length;
+        int column = matrix2[0].length;
+        int[][] result = new int[fila][column];
+
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < column; j++) {
+                int sum = 0;
+                for (int k = 0; k < matrix1[0].length; k++) {
+                    sum += matrix1[i][k] * matrix2[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+
+        return result;
+    }
+
+    public static int[][] multiplyScalarWithMatrix(int escalar, int[][] matrix) {
+        int fila = matrix.length;
+        int column = matrix[0].length;
+        int[][] result = new int[fila][column];
+
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < column; j++) {
+                result[i][j] = escalar * matrix[i][j];
+            }
+        }
+
+        return result;
+    }
+
+    public static int[][] transposeMatrix(int[][] matrix) {
+        int fila = matrix.length;
+        int column = matrix[0].length;
+        int[][] result = new int[column][fila];
+
+        for (int i = 0; i < column; i++) {
+            for (int j = 0; j <fila; j++) {
+                result[i][j] = matrix[j][i];
+            }
+        }
+
+        return result;
+    }
+
+    public static void printMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
