@@ -1,4 +1,11 @@
-///Proyecto dos 
+///Proyecto dos 3.1 Implemente un programa de consola que permita obtener las siguientes
+opraciones matemáticas a partir de arreglos y/o escalares ingresados por el
+usuario:
+ Suma de matrices
+ producto de matrices
+ producto de un escalar con una matriz.
+ Traspuesta de una matriz///
+
 
 import java.util.Scanner;
 import java.util.Random;
