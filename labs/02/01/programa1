@@ -6,12 +6,15 @@ usuario:
  producto de un escalar con una matriz.
  Traspuesta de una matriz///
 
+package com.mycompany.main;
+
 import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int escalar = 0; // Se agregó la inicialización de la variable escalar
 
         // Obtener dimensiones de la matriz
         System.out.print("Ingrese el número de filas de la matriz: ");
@@ -27,6 +30,7 @@ public class Main {
         switch (opc) {
             case 1:
                 matrix = enterMatrixElements(fila, column, scanner);
+                
                 break;
             case 2:
                 matrix = generateRandomMatrix(fila, column);
@@ -37,30 +41,41 @@ public class Main {
                 break;
         }
 
-        // Ingresar un escalar
-        System.out.print("Ingrese un escalar para multiplicar con la matriz: ");
-        int escalar = scanner.nextInt();
-
         // Realizar operaciones
-        int[][] sumResult = addMatrices(matrix, createMatrix(fila, column, scanner));
-        int[][] productResult = multiplyMatrices(matrix, createMatrix(column, fila, scanner));
+        int[][] sumResult = addMatrices(matrix, generateRandomMatrix(fila, column));
+        int[][] productResult = multiplyMatrices(matrix, generateRandomMatrix(column, fila));
         int[][] scalarProductResult = multiplyScalarWithMatrix(escalar, matrix);
         int[][] transposeResult = transposeMatrix(matrix);
 
         // Imprimir resultados
-        System.out.println("Suma de matrices:");
-        printMatrix(sumResult);
+        System.out.println("Ingrese una opcion : " + "1. Suma matriz" + " 2. Producto" + " 3. producto escalar" + " 4. traspuesta");
+        int opc1 = scanner.nextInt();
 
-        System.out.println("Producto de matrices:");
-        printMatrix(productResult);
+        switch (opc1) {
+            case 1:
+                System.out.println("Suma de matrices:");
+                printMatrix(sumResult);
+                break;
+            case 2:
+                System.out.println("Producto de matrices:");
+                System.out.print("Ingrese un escalar para multiplicar con la matriz: ");
+                escalar = scanner.nextInt(); // Se corrigió la asignación de escalar
+                printMatrix(productResult);
+                break;
+            case 3:
+                System.out.println("Producto de escalar con matriz:");
+                printMatrix(scalarProductResult);
+                break;
+            case 4:
+                System.out.println("Traspuesta de la matriz:");
+                printMatrix(transposeResult);
+                break;
+            default:
+                scanner.close();
+                break;
+        }
 
-        System.out.println("Producto de escalar con matriz:");
-        printMatrix(scalarProductResult);
-
-        System.out.println("Traspuesta de la matriz:");
-        printMatrix(transposeResult);
-
-        scanner.close();
+        scanner.close(); // Se cerró el scanner al finalizar el programa
     }
 
     public static int[][] enterMatrixElements(int fila, int column, Scanner scanner) {
@@ -80,17 +95,6 @@ public class Main {
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < column; j++) {
                 matrix[i][j] = rand.nextInt(10); // Cambiar 10 al rango que desees
-            }
-        }
-        return matrix;
-    }
-
-    public static int[][] createMatrix(int fila, int column, Scanner scanner) {
-        int[][] matrix = new int[fila][column];
-        System.out.println("Ingrese los elementos de la matriz:");
-        for (int i = 0; i < fila; i++) {
-            for (int j = 0; j < column; j++) {
-                matrix[i][j] = scanner.nextInt();
             }
         }
         return matrix;
