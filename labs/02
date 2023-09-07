@@ -1,6 +1,7 @@
 ///Proyecto dos 
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class Matriz {
     public static void main(String[] args) {
@@ -11,9 +12,27 @@ public class Matriz {
         int fila = scanner.nextInt();
         System.out.print("Ingrese el número de columnas de la matriz: ");
         int column = scanner.nextInt();
+int[][] matrix;
+
+        System.out.println("Elija cómo llenar la matriz:");
+        System.out.println("1. Ingresar manualmente");
+        System.out.println("2. Llenar aleatoriamente");
+int opc = scanner.nextInt();
+ switch (opc) {
+            case 1:
+                matrix = enterMatrixElements(fila, column, scanner);
+                break;
+            case 2:
+                matrix = generateRandomMatrix(fila, column);
+                break;
+            default:
+                System.out.println("Opción no válida. Se llenará aleatoriamente.");
+                matrix = generateRandomMatrix(fila, column);
+                break;
+        }
 
         // Crear y llenar la matriz
-        int[][] matrix = createMatrix(fila,column, scanner);
+      //  int[][] matrix = createMatrix(fila,column, scanner);
 
         // Ingresar un escalar
         System.out.print("Ingrese un escalar para multiplicar con la matriz: ");
@@ -47,6 +66,16 @@ public class Matriz {
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < column; j++) {
                 matrix[i][j] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+public static int[][] generateRandomMatrix(int fila, int column) {
+        int[][] matrix = new int[fila][column];
+        Random rand = new Random();
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] = rand.nextInt(10); // Cambiar 10 al rango que desees
             }
         }
         return matrix;
