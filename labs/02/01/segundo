@@ -28,7 +28,7 @@ public class Main {
 
     public static long ordenarPorBurbuja(double[] arr) {
         double[] copia = Arrays.copyOf(arr, arr.length);
-        long inicio = System.currentTimeMillis();
+        long inicio = System.nanoTime();
 
         for (int i = 0; i < copia.length - 1; i++) {
             for (int j = 0; j < copia.length - i - 1; j++) {
@@ -40,13 +40,13 @@ public class Main {
             }
         }
 
-        long fin = System.currentTimeMillis();
+        long fin = System.nanoTime();
         return fin - inicio;
     }
 
     public static long ordenarPorInsercion(double[] arr) {
         double[] copia = Arrays.copyOf(arr, arr.length);
-        long inicio = System.currentTimeMillis();
+        long inicio = System.nanoTime();
 
         for (int i = 1; i < copia.length; i++) {
             double clave = copia[i];
@@ -59,13 +59,13 @@ public class Main {
             copia[j + 1] = clave;
         }
 
-        long fin = System.currentTimeMillis();
+        long fin = System.nanoTime();
         return fin - inicio;
     }
 
     public static long ordenarPorSeleccion(double[] arr) {
         double[] copia = Arrays.copyOf(arr, arr.length);
-        long inicio = System.currentTimeMillis();
+        long inicio = System.nanoTime();
 
         for (int i = 0; i < copia.length - 1; i++) {
             int minIdx = i;
@@ -79,15 +79,15 @@ public class Main {
             copia[i] = temp;
         }
 
-        long fin = System.currentTimeMillis();
+        long fin = System.nanoTime();
         return fin - inicio;
     }
 
     public static long ordenarPorMergeSort(double[] arr) {
         double[] copia = Arrays.copyOf(arr, arr.length);
-        long inicio = System.currentTimeMillis();
+        long inicio = System.nanoTime();
         mergeSort(copia, 0, copia.length - 1);
-        long fin = System.currentTimeMillis();
+        long fin = System.nanoTime();
         return fin - inicio;
     }
 
