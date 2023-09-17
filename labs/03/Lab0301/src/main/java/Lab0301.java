@@ -63,6 +63,29 @@ String codigo = Entrada.readText("DATOS ESTUDIANTE\n\n Código (-1=FIN): ");
         System.out.println();
     }
     public static void reporte_registro_final(){
-        
+      if (regis.isEmpty()) {
+        System.out.println("No hay registros para mostrar.\n");
+        return;
+    }
+
+    for (Registro registro : regis) {
+        System.out.println("DATOS ESTUDIANTE");
+        System.out.println(" Código: " + registro.estudiante.getCodigo());
+        System.out.println(" Nombre: " + registro.estudiante.getNombre());
+        System.out.println(" Correo: " + registro.estudiante.getCorreo());
+        System.out.println(" Semestre: " + registro.estudiante.getSemestre());
+
+        System.out.println("\nMaterias Registradas:");
+        for (Asignatura asignatura : registro.listAsignatura) {
+            System.out.println(asignatura);
+        }
+
+        int totalCreditos = 0;
+        for (Asignatura asignatura : registro.listAsignatura) {
+            totalCreditos += asignatura.num_creditos; // Corrección aquí
+        }
+        System.out.println("Total de Créditos: " + totalCreditos);
+        System.out.println("\n-------------------------\n");
+    }     
     }
 }
