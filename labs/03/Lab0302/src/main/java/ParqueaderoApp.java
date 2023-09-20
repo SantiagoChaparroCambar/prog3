@@ -309,6 +309,41 @@ public class ParqueaderoApp extends javax.swing.JFrame {
 
     private void valorPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorPagarActionPerformed
         // TODO add your handling code here:
+      String horaIngresoStr = horaIngreso.getText();
+    String horaSalidaStr = horaSalida.getText();
+    String tipoVehiculo = "";  // Debes obtener el tipo de vehículo de tu objeto Vehiculo
+
+    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+    Date horaIngresoDate = null;
+    Date horaSalidaDate = null;
+
+    try {
+        horaIngresoDate = formatoHora.parse(horaIngresoStr);
+        horaSalidaDate = formatoHora.parse(horaSalidaStr);
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+
+    if (horaIngresoDate != null && horaSalidaDate != null) {
+        long diferenciaEnMilisegundos = horaSalidaDate.getTime() - horaIngresoDate.getTime();
+        long diferenciaEnSegundos = diferenciaEnMilisegundos / 1000;
+
+        // Dependiendo del tipo de vehículo, aplicar la tarifa correspondiente
+        int tarifaPorMinuto = 0;
+
+        if (tipoVehiculo.equals("Automovil")) {
+            tarifaPorMinuto = 60;
+        } else if (tipoVehiculo.equals("Motocicleta")) {
+            tarifaPorMinuto = 30;
+        } else if (tipoVehiculo.equals("Bicicleta")) {
+            tarifaPorMinuto = 20;
+        }
+
+        int valorAPagar = (int) (diferenciaEnSegundos / 5) * tarifaPorMinuto;
+
+        // Mostrar el valor a pagar
+        valorPagar.setText(Integer.toString(valorAPagar));
+    }+3
     }//GEN-LAST:event_valorPagarActionPerformed
 
     /**
