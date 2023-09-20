@@ -1,6 +1,13 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class ParqueaderoApp extends javax.swing.JFrame {
-
+ private List<Vehiculo> listaDeVehiculos = new ArrayList<>();
 
     public ParqueaderoApp() {
         initComponents();
@@ -233,11 +240,35 @@ public class ParqueaderoApp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        // TODO add your handling code here:
+        String tipo = "";
+        if (Automovil.isSelected()) {
+            tipo = "Automovil";
+        } else if (motocicleta.isSelected()) {
+            tipo = "Motocicleta";
+        } else if (bicicleta.isSelected()) {
+            tipo = "Bicicleta";
+        }
+
+        String placaText = placa.getText();
+        String horaIngresoText = horaIngreso.getText();
+
+        Vehiculo vehiculo = new Vehiculo(placaText, tipo, horaIngresoText);
+        listaDeVehiculos.add(vehiculo);
+
+        // Mostrar los datos guardados en lista1
+        lista1.append("Tipo: " + tipo + ", Placa: " + placaText + ", Hora de Ingreso: " + horaIngresoText + "\n");
     }//GEN-LAST:event_guardarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String placaSalir = placasalir.getText();
+
+        // Eliminar el vehículo con la placa especificada
+        Iterator<Vehiculo> iter = listaDeVehiculos.iterator();
+        while (iter.hasNext()) {
+            Vehiculo vehiculo = iter.next();
+            if (vehiculo.getPlaca().equals(placaSalir)) {
+                iter.remove();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
@@ -258,6 +289,14 @@ public class ParqueaderoApp extends javax.swing.JFrame {
 
     private void horaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaIngresoActionPerformed
         // TODO add your handling code here:
+        Date fechaActual = new Date();
+
+    // Formatear la fecha a un formato legible
+    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+    String horaActual = formatoHora.format(fechaActual);
+
+    // Mostrar la hora actual en el campo de texto
+    horaIngreso.setText(horaActual);
     }//GEN-LAST:event_horaIngresoActionPerformed
 
     private void horaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaSalidaActionPerformed
