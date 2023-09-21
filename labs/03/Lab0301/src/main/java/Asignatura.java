@@ -18,6 +18,14 @@ public class Asignatura {
     public int getSemestre() {
         return semestre;
     }
+    
+    public int getNum_creditos() {
+        return num_creditos;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
 
     @Override
     public String toString() {
