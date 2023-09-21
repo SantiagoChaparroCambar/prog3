@@ -43,17 +43,43 @@ String codigo = Entrada.readText("DATOS ESTUDIANTE\n\n Código (-1=FIN): ");
     }
     public static void registro_asignatura(){
       Registro registroActual = regis.peek();
-        do {
-            int sem = Entrada.readInt("\nVer asignaturas del semestre: ", 1, 10);
-            mostrar_asignaturas(sem);
-            int codigoAsignatura = Entrada.readInt("Ingrese el código de la asignatura que desea registrar: ");
-            Asignatura asignaturaSeleccionada = buscarAsignaturaPorCodigo(codigoAsignatura);
-            if (asignaturaSeleccionada != null) {
+
+    int totalCreditos = 0;
+    boolean continuar = true;
+
+    do {
+        int sem = Entrada.readInt("\nVer asignaturas del semestre: ", 1, 10);
+        mostrar_asignaturas(sem);
+
+        int codigoAsignatura = Entrada.readInt("Ingrese el código de la asignatura que desea registrar: ");
+        Asignatura asignaturaSeleccionada = buscarAsignaturaPorCodigo(codigoAsignatura);
+
+        if (asignaturaSeleccionada != null) {
+            // Verificar si hay cruce de horarios
+            if (!verificarCruceHorarios(registroActual, asignaturaSeleccionada)) {
                 registroActual.addAsignatura(asignaturaSeleccionada);
+                totalCreditos += asignaturaSeleccionada.getNum_creditos();
+
+                if (totalCreditos >= 16) {
+                    continuar = false;
+                    System.out.println("Ha alcanzado el límite de créditos (16).");
+                }
             } else {
-                System.out.println("La asignatura no existe.");
+                System.out.println("¡Cruce de horarios! No se puede registrar esta asignatura.");
             }
-        } while (true);
+        } else {
+            System.out.println("La asignatura no existe.");
+        }
+
+        if (totalCreditos >= 5 && totalCreditos < 16) {
+            String continuarRegistro = Entrada.readText("¿Desea registrar otra asignatura? (s/n): ");
+            if (!continuarRegistro.equalsIgnoreCase("s")) {
+                continuar = false;
+            }
+        } else if (totalCreditos >= 16) {
+            continuar = false;
+        }
+    } while (continuar);
     }
 
     public static Asignatura buscarAsignaturaPorCodigo(int codigo) {
