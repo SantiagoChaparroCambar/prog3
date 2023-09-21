@@ -1,22 +1,27 @@
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+
 
 public class ParqueaderoApp extends javax.swing.JFrame {
- private List<Vehiculo> listaDeVehiculos = new ArrayList<>();
+private List<Vehiculo> listaDeVehiculos = new ArrayList<>();
+   
 
     public ParqueaderoApp() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -29,13 +34,17 @@ public class ParqueaderoApp extends javax.swing.JFrame {
         motocicleta = new javax.swing.JRadioButton();
         bicicleta = new javax.swing.JRadioButton();
         horaIngreso = new javax.swing.JTextField();
-        horaSalida = new javax.swing.JTextField();
+        horaEgreso = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         lista1 = new javax.swing.JTextArea();
         valorPagar = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        Retirar = new javax.swing.JButton();
         placasalir = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,9 +98,9 @@ public class ParqueaderoApp extends javax.swing.JFrame {
             }
         });
 
-        horaSalida.addActionListener(new java.awt.event.ActionListener() {
+        horaEgreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horaSalidaActionPerformed(evt);
+                horaEgresoActionPerformed(evt);
             }
         });
 
@@ -99,17 +108,16 @@ public class ParqueaderoApp extends javax.swing.JFrame {
         lista1.setRows(5);
         jScrollPane1.setViewportView(lista1);
 
-        valorPagar.setText("jTextField4");
         valorPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valorPagarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Retirar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Retirar.setText("Retirar");
+        Retirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                RetirarActionPerformed(evt);
             }
         });
 
@@ -120,6 +128,8 @@ public class ParqueaderoApp extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Vehiculo :");
+
+        jLabel4.setText("00:00:00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,22 +155,21 @@ public class ParqueaderoApp extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(horaIngreso, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(placa, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(horaSalida, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(motocicleta))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(bicicleta))))
+                                .addComponent(horaEgreso, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(guardar)))
-                .addGap(39, 39, 39)
+                        .addComponent(guardar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(motocicleta)
+                                .addComponent(bicicleta)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Retirar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -194,7 +203,9 @@ public class ParqueaderoApp extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bicicleta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(horaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -205,7 +216,7 @@ public class ParqueaderoApp extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(horaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(horaEgreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(placasalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addComponent(guardar)
@@ -217,7 +228,7 @@ public class ParqueaderoApp extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(valorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(Retirar)
                         .addContainerGap())))
         );
 
@@ -226,8 +237,9 @@ public class ParqueaderoApp extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 334, Short.MAX_VALUE))
+                .addGap(0, 291, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,57 +249,83 @@ public class ParqueaderoApp extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        String tipo = "";
-        if (Automovil.isSelected()) {
-            tipo = "Automovil";
-        } else if (motocicleta.isSelected()) {
-            tipo = "Motocicleta";
-        } else if (bicicleta.isSelected()) {
-            tipo = "Bicicleta";
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+         String tipo = "";
+    if (Automovil.isSelected()) {
+        tipo = "Automovil";
+    } else if (motocicleta.isSelected()) {
+        tipo = "Motocicleta";
+    } else if (bicicleta.isSelected()) {
+        tipo = "Bicicleta";
+    }
+
+    Date fechaActual = new Date();
+    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+    String horaActual = formatoHora.format(fechaActual);
+
+    String placaText = placa.getText();
+    
+    Vehiculo vehiculo = new Vehiculo(placaText, tipo, horaActual);
+    listaDeVehiculos.add(vehiculo);
+    horaIngreso.setText(horaActual);
+
+    // Mostrar los datos guardados en lista1
+    lista1.append("Tipo: " + tipo + ", Placa: " + placaText + ", Hora de Ingreso: " + horaActual + "\n");
+    }                                       
+
+    private void RetirarActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+       String placaSalir = placasalir.getText();
+
+    for (Vehiculo vehiculo : listaDeVehiculos) {
+        if (vehiculo.getPlaca().equals(placaSalir)) {
+            Date fechaActual = new Date();
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+            String horaSalida = formatoHora.format(fechaActual);
+            
+            horaEgreso.setText(horaSalida);
+            
+
+            vehiculo.setHoraSalida(horaSalida);
+            double valor = vehiculo.calcularValor();
+
+            lista1.append("Placa: " + placaSalir + ", Tipo: " + vehiculo.getTipo() +
+                          ", Hora de Ingreso: " + vehiculo.getHoraIngreso() +
+                          ", Hora de Salida: " + horaSalida +
+                          ", Tiempo Total: " + vehiculo.calcularTiempoEnMinutos() + " minutos" +
+                          ", Valor a Pagar: " + valor + " COP\n");
+            
+               
+
+            listaDeVehiculos.remove(vehiculo);
+            return;
         }
+        
+    }
+    lista1.append("Vehículo no encontrado\n");
 
-        String placaText = placa.getText();
-        String horaIngresoText = horaIngreso.getText();
+    }                                       
 
-        Vehiculo vehiculo = new Vehiculo(placaText, tipo, horaIngresoText);
-        listaDeVehiculos.add(vehiculo);
-
-        // Mostrar los datos guardados en lista1
-        lista1.append("Tipo: " + tipo + ", Placa: " + placaText + ", Hora de Ingreso: " + horaIngresoText + "\n");
-    }//GEN-LAST:event_guardarActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void placaActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
-        String placaSalir = placasalir.getText();
+    }                                     
 
-        // Eliminar el vehículo con la placa especificada
-        Iterator<Vehiculo> iter = listaDeVehiculos.iterator();
-        while (iter.hasNext()) {
-            Vehiculo vehiculo = iter.next();
-            if (vehiculo.getPlaca().equals(placaSalir)) {
-                iter.remove();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
+    private void AutomovilActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_placaActionPerformed
+    }                                         
 
-    private void AutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AutomovilActionPerformed
+    private void motocicletaActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }//GEN-LAST:event_AutomovilActionPerformed
+    }                                           
 
-    private void motocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motocicletaActionPerformed
+    private void bicicletaActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_motocicletaActionPerformed
+    }                                         
 
-    private void bicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bicicletaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bicicletaActionPerformed
-
-    private void horaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaIngresoActionPerformed
+    private void horaIngresoActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
         Date fechaActual = new Date();
 
@@ -297,34 +335,46 @@ public class ParqueaderoApp extends javax.swing.JFrame {
 
     // Mostrar la hora actual en el campo de texto
     horaIngreso.setText(horaActual);
-    }//GEN-LAST:event_horaIngresoActionPerformed
+    horaIngreso.getText();
+    }                                           
 
-    private void horaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaSalidaActionPerformed
+    private void horaEgresoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }//GEN-LAST:event_horaSalidaActionPerformed
+        Date fechaActual = new Date();
 
-    private void placasalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placasalirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_placasalirActionPerformed
+    // Formatear la fecha a un formato legible
+    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+    String horaActual = formatoHora.format(fechaActual);
 
-    private void valorPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorPagarActionPerformed
+    // Mostrar la hora actual en el campo de texto
+    horaEgreso.setText(horaActual);
+    }                                          
+
+    private void placasalirActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-      String horaIngresoStr = horaIngreso.getText();
-    String horaSalidaStr = horaSalida.getText();
+        String placaBuscar = placasalir.getText();
+    for (Vehiculo vehiculo : listaDeVehiculos) {
+        if (vehiculo.getPlaca().equals(placaBuscar)) {
+            double valor = vehiculo.calcularValor();
+            valorPagar.setText(String.valueOf(valor));
+            return;
+        }
+    }
+    valorPagar.setText("Vehículo no encontrado");
+    }                                          
+
+    private void valorPagarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        String horaIngresoStr = horaIngreso.getText();
+    String horaSalidaStr = horaEgreso.getText();
     String tipoVehiculo = "";  // Debes obtener el tipo de vehículo de tu objeto Vehiculo
 
-    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-    Date horaIngresoDate = null;
-    Date horaSalidaDate = null;
-
     try {
-        horaIngresoDate = formatoHora.parse(horaIngresoStr);
-        horaSalidaDate = formatoHora.parse(horaSalidaStr);
-    } catch (ParseException e) {
-        e.printStackTrace();
-    }
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
 
-    if (horaIngresoDate != null && horaSalidaDate != null) {
+        Date horaIngresoDate = formatoHora.parse(horaIngresoStr);
+        Date horaSalidaDate = formatoHora.parse(horaSalidaStr);
+
         long diferenciaEnMilisegundos = horaSalidaDate.getTime() - horaIngresoDate.getTime();
         long diferenciaEnSegundos = diferenciaEnMilisegundos / 1000;
 
@@ -343,8 +393,10 @@ public class ParqueaderoApp extends javax.swing.JFrame {
 
         // Mostrar el valor a pagar
         valorPagar.setText(Integer.toString(valorAPagar));
-    }+3
-    }//GEN-LAST:event_valorPagarActionPerformed
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+    }                                          
 
     /**
      * @param args the command line arguments
@@ -381,16 +433,18 @@ public class ParqueaderoApp extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JRadioButton Automovil;
+    private javax.swing.JButton Retirar;
     private javax.swing.JRadioButton bicicleta;
     private javax.swing.JButton guardar;
+    private javax.swing.JTextField horaEgreso;
     private javax.swing.JTextField horaIngreso;
-    private javax.swing.JTextField horaSalida;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -401,5 +455,6 @@ public class ParqueaderoApp extends javax.swing.JFrame {
     private javax.swing.JTextField placa;
     private javax.swing.JTextField placasalir;
     private javax.swing.JTextField valorPagar;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
+
 }
