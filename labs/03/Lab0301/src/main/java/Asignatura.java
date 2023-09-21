@@ -6,7 +6,7 @@ public class Asignatura {
     int num_creditos;
     String horario;
     
-     Asignatura(int codigo, String nombre, int semestre, int num_creditos,
+     public Asignatura(int codigo, String nombre, int semestre, int num_creditos,
             String horario) {
         this.codigo = codigo;
         this.nombre = nombre;
