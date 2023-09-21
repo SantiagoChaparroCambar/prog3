@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Arrays;
 import java.io.File;
@@ -35,12 +36,10 @@ public static LinkedList<Asignatura> loadFile(String filename) {
             file = new Scanner(new File(filename));
             while (file.hasNextLine()) {
                 String line[] = file.nextLine().split(";");
-                System.out.println(Arrays.toString(line));
                 listAsignatura.add(new Asignatura(Integer.parseInt(line[0]),
-                    line[1], Integer.parseInt(line[2]), Integer.parseInt(line[3]),
-                    line[4]));
+                        line[1], Integer.parseInt(line[2]), Integer.parseInt(line[3]),
+                        line[4]));
             }
-            System.out.println();
             file.close();
         } catch (Exception ex) {
             ex.printStackTrace();
