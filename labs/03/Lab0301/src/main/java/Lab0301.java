@@ -2,14 +2,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
-/**
- *
- * @author Estudiante
- */
 public class Lab0301 {
     static LinkedList<Asignatura> materias = new LinkedList<>();
 static Queue<Registro> regis =new LinkedList<>();
@@ -50,17 +42,27 @@ String codigo = Entrada.readText("DATOS ESTUDIANTE\n\n Código (-1=FIN): ");
         return true;   
     }
     public static void registro_asignatura(){
+      Registro registroActual = regis.peek();
         do {
             int sem = Entrada.readInt("\nVer asignaturas del semestre: ", 1, 10);
             mostrar_asignaturas(sem);
-        } while (false);
+            int codigoAsignatura = Entrada.readInt("Ingrese el código de la asignatura que desea registrar: ");
+            Asignatura asignaturaSeleccionada = buscarAsignaturaPorCodigo(codigoAsignatura);
+            if (asignaturaSeleccionada != null) {
+                registroActual.addAsignatura(asignaturaSeleccionada);
+            } else {
+                System.out.println("La asignatura no existe.");
+            }
+        } while (true);
     }
-     public static void mostrar_asignaturas(int sem) {
-        for (Asignatura s : materias) {
-            if (s.getSemestre() == sem)
-                System.out.println(s);
+
+    public static Asignatura buscarAsignaturaPorCodigo(int codigo) {
+        for (Asignatura asignatura : materias) {
+            if (asignatura.codigo == codigo) {
+                return asignatura;
+            }
         }
-        System.out.println();
+        return null;
     }
     public static void reporte_registro_final(){
       if (regis.isEmpty()) {
@@ -70,22 +72,33 @@ String codigo = Entrada.readText("DATOS ESTUDIANTE\n\n Código (-1=FIN): ");
 
     for (Registro registro : regis) {
         System.out.println("DATOS ESTUDIANTE");
-        System.out.println(" Código: " + registro.estudiante.getCodigo());
-        System.out.println(" Nombre: " + registro.estudiante.getNombre());
-        System.out.println(" Correo: " + registro.estudiante.getCorreo());
-        System.out.println(" Semestre: " + registro.estudiante.getSemestre());
+        System.out.println(" Código: " + registro.getEstudiante().getCodigo());
+        System.out.println(" Nombre: " + registro.getEstudiante().getNombre());
+        System.out.println(" Correo: " + registro.getEstudiante().getCorreo());
+        System.out.println(" Semestre: " + registro.getEstudiante().getSemestre());
 
         System.out.println("\nMaterias Registradas:");
-        for (Asignatura asignatura : registro.listAsignatura) {
+        for (Asignatura asignatura : registro.getListAsignatura()) {
             System.out.println(asignatura);
         }
 
         int totalCreditos = 0;
-        for (Asignatura asignatura : registro.listAsignatura) {
-            totalCreditos += asignatura.num_creditos; // Corrección aquí
+        for (Asignatura asignatura : registro.getListAsignatura()) {
+            totalCreditos += asignatura.getNum_creditos();
         }
         System.out.println("Total de Créditos: " + totalCreditos);
         System.out.println("\n-------------------------\n");
-    }     
     }
+}
+}
+
+public static boolean verificarCruceHorarios(Registro registro, Asignatura nuevaAsignatura) {
+    for (Asignatura asignatura : registro.getListAsignatura()) {
+        if (asignatura.getSemestre() == nuevaAsignatura.getSemestre()) {
+            if (asignatura.getHorario().equals(nuevaAsignatura.getHorario())) {
+                return true; // Existe cruce de horarios
+            }
+        }
+    }
+    return false; // No hay cruce de horarios
 }
