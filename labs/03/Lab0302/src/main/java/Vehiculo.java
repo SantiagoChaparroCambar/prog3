@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Vehiculo {
     private String placa;
     private String tipo;
@@ -56,9 +60,18 @@ public class Vehiculo {
         }
     }
 
-    private int calcularTiempoEnMinutos() {
-        
-        return 0;
+    public int calcularTiempoEnMinutos() {
+        try {
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+
+            Date horaIngresoDate = formatoHora.parse(horaIngreso);
+            Date horaSalidaDate = formatoHora.parse(horaSalida);
+
+            long diferenciaEnMilisegundos = horaSalidaDate.getTime() - horaIngresoDate.getTime();
+            return (int) (diferenciaEnMilisegundos / (3 * 1000));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
-
