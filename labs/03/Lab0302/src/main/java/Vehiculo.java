@@ -50,11 +50,11 @@ public class Vehiculo {
         int tiempoMinutos = calcularTiempoEnMinutos();
         switch (tipo) {
             case "Automovil":
-                return tiempoMinutos * 0.12; // 60 pesos por minuto
+                return tiempoMinutos * 0.6; // 60 pesos por minuto
             case "Motocicleta":
-                return tiempoMinutos * 0.06; // 30 pesos por minuto
+                return tiempoMinutos * 0.3; // 30 pesos por minuto
             case "Bicicleta":
-                return tiempoMinutos * 0.04; // 20 pesos por minuto
+                return tiempoMinutos * 0.2; // 20 pesos por minuto
             default:
                 return 0.0;
         }
