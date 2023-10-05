@@ -34,7 +34,21 @@ public static void main(String[] args){
         temporizadores.put(temporizadores.size() + 1, temporizador);// asignar un ID a el Temporizador 
         timer.schule(temporizador,segundos*1000); // de milisegundos a segundos
         break;
-        
+
+      case 2:// detener Temporizador 
+        System.out.println("Ingrese el ID del temporizador a detener: ");
+        int idDetener = scanner.nextInt();
+        scanner.nextLine();
+
+        TimerTask tareaDetener = temporizadores.get(idDetener);
+        if(tareaDetener != null){
+          tareaDetener.cancel();// cancelar la tarea del temporizador 
+          temporizadores.remove(idDetener);//eliminaar temporizador de la lista
+          System.out.println(" Temporizador Detenido !!!!!!!");
+        } else {
+          System.out.println(" Temporizador no Encontrado !!!!!!");
+        }
+        break;
     }
   }
 }
