@@ -49,6 +49,34 @@ public static void main(String[] args){
           System.out.println(" Temporizador no Encontrado !!!!!!");
         }
         break;
+case 3: // reiniciar temporizador 
+                   
+                    System.out.print("Ingrese el ID del temporizador que desea reiniciar: ");
+                    int idReiniciar = scanner.nextInt();
+                    scanner.nextLine();
+
+                    TimerTask tareaReiniciar = temporizadores.get(idReiniciar);
+                    if (tareaReiniciar != null) {
+                        tareaReiniciar.cancel(); // Cancelar la tarea del temporizador
+                        temporizadores.remove(idReiniciar); // Eliminar el temporizador de la lista
+
+                        // Volver a programar la tarea
+                        Temporizador nuevoTemporizador = new Temporizador(((Temporizador) tareaReiniciar).getMensaje());
+                        temporizadores.put(idReiniciar, nuevoTemporizador);
+                        timer.schedule(nuevoTemporizador, ((Temporizador) tareaReiniciar).getRetraso());
+
+                        System.out.println("Temporizador reiniciado.");
+                    } else {
+                        System.out.println("Temporizador no encontrado.");
+                    }
+                    break;
+                case 4:
+                    timer.cancel();
+                    System.exit(0);
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
+
     }
   }
 }
