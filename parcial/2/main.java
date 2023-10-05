@@ -1,11 +1,15 @@
 import java.util.Scanner;
 import java.util.Timer;
+import java.util.TimerTask;
+import java.util.HashMap;
 
 public class main {
+  static Timer timer = new Timer();
+  static HashMap<Integer, TimerTask> temporizadores = new HashMap<>();
+  
 public static void main(String[] args){
-
   Scanner scanner = new Scanner(System.in);
-  Timer timer = new Timer();
+  
 
   while(true){
     System.out.println(" 1. Crear Temporizador ");
@@ -13,8 +17,25 @@ public static void main(String[] args){
     System.out.println(" 3. Reiniciar Temporizador ");
     System.out.println(" 4. Salir ");
     System.out.println(" Seleccione una opcion: ");
-    
 
+    int opc = scanner.nextInt();
+    scanner.nextLine();
+
+    switch(opc){
+      case 1: // crear el temporizador 
+      System.out.println(" Ingrese el mensaje del temporizador: ");
+        String mensaje = scanner.nextLine();
+      System.out.println(" Ingrese el tiempo de espera en segundos : ");
+        int segundos = scanner.nextInt();
+        scanner.nextLine();
+        
+        // crear una instancia de Temporizador y programar su ejecucion
+        Temporizador temporizador = new Temporizador(mensaje);
+        temporizadores.put(temporizadores.size() + 1, temporizador);// asignar un ID a el Temporizador 
+        timer.schule(temporizador,segundos*1000); // de milisegundos a segundos
+        break;
+        
+    }
   }
 }
   
