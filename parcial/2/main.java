@@ -43,7 +43,7 @@ public class Main {
                     TimerTask tareaDetener = temporizadores.get(idDetener);
                     if (tareaDetener != null) {
                         tareaDetener.cancel();// cancelar la tarea del temporizador 
-                        temporizadores.remove(idDetener);//eliminaar temporizador de la lista
+                       // temporizadores.remove(idDetener);//eliminaar temporizador de la lista
                         System.out.println("Temporizador Detenido!");
                     } else {
                         System.out.println("Temporizador no Encontrado!");
@@ -58,7 +58,7 @@ public class Main {
                     TimerTask tareaReiniciar = temporizadores.get(idReiniciar);
                     if (tareaReiniciar != null) {
                         tareaReiniciar.cancel(); // Cancelar la tarea del temporizador
-                        temporizadores.remove(idReiniciar);// Eliminar el temporizador de la lista
+                      //  temporizadores.remove(idReiniciar);// Eliminar el temporizador de la lista
 
                         // Volver a programar la tarea
                         Temporizador nuevoTemporizador = new Temporizador(((Temporizador) tareaReiniciar).getMensaje(), ((Temporizador) tareaReiniciar).getRetraso());
