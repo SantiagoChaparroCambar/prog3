@@ -1,4 +1,8 @@
-https://www.datos.gov.co/Econom-a-y-Finanzas/Tasa-de-Cambio-Representativa-del-Mercado-TRM/32sa-8pi3
+https://www.datos.gov.co/Transporte/Mortalidad-en-vias/dr5c-eewa
 
-Descripcion: La Tasa de Cambio Representativa del Mercado–TRM corresponde al promedio ponderado de las operaciones de compra y venta de contado de dólares de los Estados Unidos de América a cambio de moneda legal colombiana.
-Se adjunta archivo con explicación detallada.
+Descripcion:Sobre un archivo geográfico de la red vial carretera nacional, con las principales vías nacionales de la red primaria y secundaria, que se encuentre particionada en diferentes elementos los cuales no deben superar una longitud máxima de 10 kilómetros, para los elementos con una mayor longitud deben ser separados en partes que contengan longitudes menores a esta longitud.
+
+Esta red debe contener un código único que permita identificar cada tramo vial de forma independiente (COD).
+
+SELECCIÓN DE SINIESTROS VIALES
+Considerando que se cuenta con la base de fallecidos de SPOA, que coincide en su gran mayoría con la base de Medicina Legal, se realiza un filtro inicial para seleccionar la serie histórica que considere los últimos 5 años de siniestralidad con fatalidades (2015 a 2019).
