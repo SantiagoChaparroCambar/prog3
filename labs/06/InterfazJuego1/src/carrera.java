@@ -1,8 +1,8 @@
-
+package carrera; 
 import static java.lang.Math.random;
 import java.lang.Math;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 
 public class carrera extends Thread{
     // crear variables
@@ -24,10 +24,28 @@ public class carrera extends Thread{
             try{
                 sleep((int)(Math.random()*1000));
                 car1 = auto.getcarro1().getLocation().x;
+                car2 = auto.getcarro2().getLocation().x;
+                car3 = auto.getcarro3().getLocation().x;
+                car4 = auto.getcarro4().getLocation().x;
                 
+                if(car2 < auto.getbarrera().getLocation().x - 125 && car1 < auto.getbarrera().getLocation().x - 125 ){
+                    etiqueta.setLocation(etiqueta.getLocation().x + 10, etiqueta.getLocation().y );
+                    auto.repaint();
+                }else {
+                    break;
+                }
             }catch(InterruptedException e){
                 System.out.println("e");
             }
+              if(etiqueta.getLocation().x >= auto.getbarrera().getLocation().x - 125){
+                  if(car1 > car2){
+                      JOptionPane.showMessageDialog(null,"Gano el primer auto");
+                  }
+                  else if(car2 > car1){
+                      JOptionPane.showMessageDialog(null,"Gano el segundo auto");
+                  }
+                  else{
+                      JOptionPane.showMessageDialog(null,"Empate");
         }
     }
 }
